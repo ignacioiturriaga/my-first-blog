@@ -1,0 +1,15 @@
+{%	extends	'blog/base.html'	%}
+
+{% block content%}
+{%	for	post	in	posts	%}
+	<div	class="post">
+		<div	class="date">
+			<p>published:	{{	post.published_date	}}</p> <!atributo published_date de la clase post (modelo)>
+		</div>
+		<h1><a href="{% url 'post_detail' pk=post.pk %}">{{	post.title	}}</a></h1>
+		<!Creamos un link en el titulo del post, que envia pk a la view post_detail, la cual posteriormente nos muestra el template post_detail.html  >
+		<p>{{	post.text|linebreaksbr	}}</p>
+		<a href="{% url 'blog.views.post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+	</div>
+{%	endfor	%}
+{% endblock %}
